@@ -6,9 +6,26 @@ export default function Navbar() {
       </h1>
 
       <div className="flex gap-6">
-        <a href="/">Home</a>
-        <a href="/events">Events</a>
-        <a href="/create">Create Event</a>
+        <a
+          href="/"
+          className="font-semibold text-gray-900 hover:text-blue-600"
+        >
+          Home
+        </a>
+
+        <a
+          href="/events"
+          className="font-semibold text-gray-900 hover:text-blue-600"
+        >
+          Events
+        </a>
+
+        <a
+          href="/create"
+          className="font-semibold text-gray-900 hover:text-blue-600"
+        >
+          Create Event
+        </a>
       </div>
     </nav>
   );
