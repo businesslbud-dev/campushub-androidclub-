@@ -4,6 +4,7 @@ type EventCardProps = {
   location: string;
   category: string;
   description: string;
+  eventId: number;
 };
 
 export default function EventCard({
@@ -12,6 +13,7 @@ export default function EventCard({
   location,
   category,
   description,
+  eventId,
 }: EventCardProps) {
   return (
     <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
@@ -37,9 +39,12 @@ export default function EventCard({
         {description}
       </p>
 
-      <button className="mt-6 w-full rounded-xl bg-gray-900 px-4 py-3 font-medium text-white transition hover:bg-blue-600">
-        View Event
-      </button>
+      <a
+        href={`/event/${eventId}`}
+        className="mt-6 block w-full rounded-xl bg-gray-900 px-4 py-3 text-center font-medium text-white transition hover:bg-blue-600"
+      >
+        View Event →
+      </a>
     </div>
   );
 }

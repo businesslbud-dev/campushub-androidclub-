@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import EventCard from "@/components/EventCard";
 
-const events = [
+const defaultEvents = [
   {
     title: "Web Development Workshop",
     date: "Sep 20",
@@ -56,8 +56,17 @@ const events = [
 ];
 
 export default function EventsPage() {
+  const [events, setEvents] = useState(defaultEvents);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+
+  useEffect(() => {
+    const savedEvents = JSON.parse(
+      localStorage.getItem("campushub-events") || "[]"
+    );
+
+    setEvents([...defaultEvents, ...savedEvents]);
+  }, []);
 
   const filteredEvents = events.filter((event) => {
     const matchesSearch =
@@ -74,6 +83,7 @@ export default function EventsPage() {
     <main className="min-h-screen bg-gray-50">
       <Navbar />
 
+      {/* Header */}
       <section className="bg-gray-950 px-6 py-16 text-white">
         <div className="mx-auto max-w-6xl">
           <p className="font-semibold uppercase tracking-widest text-blue-400">
@@ -90,7 +100,10 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Events */}
       <section className="mx-auto max-w-6xl px-6 py-10">
+
+        {/* Search and Filter */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row">
           <input
             type="text"
@@ -115,19 +128,29 @@ export default function EventsPage() {
           </select>
         </div>
 
+        {/* Event Count */}
         <p className="mb-6 text-sm text-gray-500">
           Showing {filteredEvents.length} events
         </p>
 
+        {/* Event Cards */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredEvents.map((event) => (
-            <EventCard key={event.title} {...event} />
+            <EventCard
+              key={`${event.title}-${events.indexOf(event)}`}
+              eventId={events.indexOf(event)}
+              {...event}
+            />
           ))}
         </div>
 
+        {/* No Results */}
         {filteredEvents.length === 0 && (
           <div className="rounded-2xl border border-dashed p-12 text-center">
-            <p className="text-lg font-semibold">No events found.</p>
+            <p className="text-lg font-semibold">
+              No events found.
+            </p>
+
             <p className="mt-2 text-gray-500">
               Try a different search or category.
             </p>

@@ -87,25 +87,28 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-3">
           <EventCard
+            eventId={0}
             title="Web Development Workshop"
             date="Sep 20"
-            location="Innovation Lab"
+            location="MGR Auditorium"
             category="Technology"
             description="Build your first modern web application and learn the fundamentals of React."
           />
 
           <EventCard
+            eventId={1}
             title="AI & Future Tech"
             date="Sep 22"
-            location="Main Auditorium"
+            location="AB3"
             category="Talk"
             description="Explore how artificial intelligence is changing the future of technology."
           />
 
           <EventCard
+            eventId={2}
             title="Campus Hackathon"
             date="Sep 28"
-            location="Computer Lab"
+            location="AB1 209"
             category="Competition"
             description="Team up, build something awesome, and compete with students across campus."
           />

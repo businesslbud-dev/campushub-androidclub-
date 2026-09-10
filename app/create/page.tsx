@@ -13,7 +13,30 @@ export default function CreateEventPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    const newEvent = {
+      title,
+      date,
+      location,
+      category,
+      description,
+    };
+
+    const existingEvents = JSON.parse(
+      localStorage.getItem("campushub-events") || "[]"
+    );
+
+    localStorage.setItem(
+      "campushub-events",
+      JSON.stringify([...existingEvents, newEvent])
+    );
+
     setSubmitted(true);
+
+    setTitle("");
+    setDate("");
+    setLocation("");
+    setDescription("");
   }
 
   return (
